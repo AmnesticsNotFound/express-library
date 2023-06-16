@@ -34,9 +34,7 @@ app.use("/catalog", catalogRouter); // Add catalog routes to middleware chain.
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 // Set up mongoose connection
-const dev_db_url =
-  "mongodb+srv://admin:admin@cluster0.lc5uunb.mongodb.net/?retryWrites=true&w=majority";
-const mongoDB = dev_db_url;
+const mongoDB = "mongodb+srv://admin:admin@cluster0.lc5uunb.mongodb.net/local_library?retryWrites=true&w=majority";
 
 
 main().catch((err) => console.log(err));
