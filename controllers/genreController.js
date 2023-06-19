@@ -53,7 +53,7 @@ exports.genre_create_post = [
   asyncHandler(async (req, res, next) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
-
+    console.log(req.body.name)
     // Create a genre object with escaped and trimmed data.
     const genre = new Genre({ name: req.body.name });
 

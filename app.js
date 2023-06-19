@@ -3,13 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const catalogRouter = require('./routes/catalog');
+const compression = require('compression');
+const helmet = require("helmet");
+const RateLimit = require("express-rate-limit");
 
 
-
-var catalogRouter = require('./routes/catalog');
-var compression = require('compression');
-var helmet = require("helmet");
-var app = express();
+const app = express();
 app.use(compression()); // Compress all routes
 app.use(express.static(path.join(__dirname, "public")));
 // Set CSP headers to allow our Bootstrap and Jquery to be served
@@ -21,7 +21,7 @@ app.use(
   })
 );
 // Set up rate limiter: maximum of twenty requests per minute
-const RateLimit = require("express-rate-limit");
+
 const limiter = RateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 20,
@@ -29,7 +29,7 @@ const limiter = RateLimit({
 // Apply rate limiter to all requests
 app.use(limiter);
 
-app.use("/catalog", catalogRouter); // Add catalog routes to middleware chain.
+
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
